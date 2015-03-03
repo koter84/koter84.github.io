@@ -1,0 +1,39 @@
+default vesamenu.c32
+prompt 0
+timeout 0
+menu title OpenWRT PXE-Boot Fedora
+
+label install32
+  menu label ^Install Fedora 21 32-bit
+  kernel f21_32/vmlinuz
+  append initrd=f21_32/initrd.img inst.stage2=http://download.fedoraproject.org/pub/fedora/linux/releases/21/Server/x86_64/os/ ip=dhcp
+
+label install64
+  menu label ^Install Fedora 21 64-bit
+  kernel f21_64/vmlinuz
+  append initrd=f21_64/initrd.img inst.stage2=http://download.fedoraproject.org/pub/fedora/linux/releases/21/Server/x86_64/os/ ip=dhcp
+
+label live32
+  menu label ^Live Fedora 21 Workstation 32-bit
+  kernel f21_32/vmlinuz
+  append initrd=f21_32/initrd.img inst.stage2=http://download.fedoraproject.org/pub/fedora/linux/releases/21/Server/i386/os/ ip=dhcp ks=http://koter84.github.io/fedora_kickstart/fedora-live-workstation.ks
+
+label live64
+  menu label ^Live Fedora 21 Workstation 64-bit
+  menu default
+  kernel f21_64/vmlinuz
+  append initrd=f21_64/initrd.img inst.stage2=http://download.fedoraproject.org/pub/fedora/linux/releases/21/Server/x86_64/os/ ip=dhcp ks=http://koter84.github.io/fedora_kickstart/fedora-live-workstation.ks
+
+label rescue32
+  menu label ^Rescue installed system 32-bit
+  kernel f21_32/vmlinuz
+  append initrd=f21_32/initrd.img ip=dhcp root=live:http://download.fedoraproject.org/pub/fedora/linux/releases/21/Server/i386/os/LiveOS/squashfs.img rescue
+
+label rescue64
+  menu label ^Rescue installed system 64-bit
+  kernel f21_64/vmlinuz
+  append initrd=f21_64/initrd.img ip=dhcp root=live:http://download.fedoraproject.org/pub/fedora/linux/releases/21/Server/x86_64/os/LiveOS/squashfs.img rescue
+
+label local
+  menu label Boot from ^local drive
+  localboot 0xffff

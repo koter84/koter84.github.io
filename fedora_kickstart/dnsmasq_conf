@@ -1,0 +1,23 @@
+
+dhcp-boot=pxelinux.0
+dhcp-match=set:efi-x86_64,option:client-arch,7
+dhcp-boot=tag:efi-x86_64,uefi/shim.efi
+
+
+
+
+dhcp-match=x86PC, option:client-arch, 0
+dhcp-boot=tag:x86PC,pxelinux.0
+pxe-service=tag:x86PC,x86PC,"x86PC boot msg",pxelinux
+
+dhcp-match=BC_EFI, option:client-arch, 7
+
+#dhcp-boot=tag:BC_EFI,syslinux.efi
+dhcp-boot=tag:BC_EFI,uefi/shim.efi
+
+#pxe-service=tag:BC_EFI,BC_EFI,"BC_EFI boot msg",syslinux.efi
+pxe-service=tag:BC_EFI,BC_EFI,"BC_EFI boot msg",uefi/shim.efi
+
+
+
+

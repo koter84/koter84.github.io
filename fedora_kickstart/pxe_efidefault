@@ -1,0 +1,26 @@
+function load_video {
+  insmod efi_gop
+  insmod efi_uga
+  insmod video_bochs
+  insmod video_cirrus
+  insmod all_video
+  }
+
+load_video
+set gfxpayload=keep
+insmod gzio
+
+menuentry 'Install Fedora 64-bit'  --class fedora --class gnu-linux --class gnu --class os {
+  linuxefi f21_64/vmlinuz ip=dhcp inst.repo=http://download.fedoraproject.org/pub/fedora/linux/releases/21/Server/x86_64/os/
+  initrdefi f21_64/initrd.img
+  }
+
+menuentry 'Install Fedora 21 Server 64-bit'  --class fedora --class gnu-linux --class gnu --class os {
+  kernel f21_64/vmlinuz
+  append initrd=f21_64/initrd.img inst.repo=http://download.fedoraproject.org/pub/fedora/linux/releases/21/Server/x86_64/os/ ip=dhcp ks=https://git.fedorahosted.org/cgit/spin-kickstarts.git/plain/fedora-install-server.ks?h=f21
+  }
+
+menuentry 'Rescue installed system 64-bit'  --class fedora --class gnu-linux --class gnu --class os {
+  kernel f21_64/vmlinuz
+  append initrd=f21_64/initrd.img root=live:http://download.fedoraproject.org/pub/fedora/linux/releases/21/Server/x86_64/os/LiveOS/squashfs.img rescue
+  }
