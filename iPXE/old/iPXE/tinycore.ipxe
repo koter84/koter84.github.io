@@ -7,20 +7,16 @@
 set tmirror tinycorelinux.net
 
 :tinycore_menu
-set dir 6.x/x86/release
+set dir 5.x/x86/release
 menu TinyCoreLinux
-item Core Core (9 MB)
-item TinyCore TinyCore (15 MB)
-item CorePlus CorePlus (72 MB)
+item --key c Core Core (8 MB)
 choose version || goto tinycore_exit
 
 echo ${cls}
 
+kernel ${memdisk} iso raw ${params}
 initrd http://${tmirror}/${dir}/${version}-current.iso
-chain ${memdisk} iso raw
-#kernel ${memdisk} iso raw ${params}
-#initrd http://${tmirror}/${dir}/${version}-current.iso
-#boot
+boot
 
 :tinycore_exit
 clear menu

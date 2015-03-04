@@ -1,0 +1,40 @@
+DEFAULT vesamenu.c32
+PROMPT 0
+MENU TITLE OpenWRT PXE-Boot Menu
+
+label localdisk
+	MENU LABEL Normal boot from local harddisk
+	localboot 0
+
+LABEL plop
+        MENU LABEL Plop Boot Manager
+        KERNEL memdisk
+        APPEND initrd=plpbt.img keeppxe
+
+LABEL ipxekwak
+        MENU LABEL iPXE Kwak
+        KERNEL ipxe.lkrn
+        APPEND dhcp && chain tftp://192.168.32.1/kwak.ipxe
+
+LABEL ipxerackspace
+	MENU LABEL iPXE boot.rackspace.com
+	KERNEL ipxe.lkrn
+	APPEND dhcp && chain http://boot.rackspace.com/menu.ipxe
+
+label unet
+        MENU LABEL PCDOS7 Universal Network Boot
+        KERNEL memdisk
+        APPEND initrd=unet.img keeppxe
+
+label memtest
+        MENU LABEL Memory Test
+        KERNEL memtest
+
+#label Ubuntu
+#	MENU LABEL Ubuntu Live 13.10 64-Bit
+#	KERNEL disks/ubuntu/casper/vmlinuz.efi
+#	APPEND boot=casper ide=nodma netboot=nfs nfsroot=192.168.32.1:/mnt/usb/tftp/disks/ubuntu1310-64/ initrd=disks/ubuntu/casper/initrd.lz
+#	TEXT HELP
+#		Starts the Ubuntu Live-CD - Version 13.10 64-Bit
+#	ENDTEXT
+
