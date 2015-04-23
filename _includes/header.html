@@ -1,37 +1,30 @@
 <!-- header start -->
 
-<div class="teaserimage">
+<header class="teaserimage">
     <div class="teaserimage-image" {% if site.cover %}style="background-image: url({{ site.cover }})"{% endif %}>
         Teaser Image
     </div>
-</div>
+</header>
 
 <header class="blog-header">
     {% if site.logo %}
-      <a class="blog-logo" href="{{site.url}}" style="background-image: url('{{ site.logo }}')">{{ site.title }}</a>
+      <a class="blog-logo" href="/" style="background-image: url('{{ site.logo }}')">{{ site.title }}</a>
     {% else %}
-      <a class="blog-logo" href="{{site.url}}">{{ site.title }}</a>
+      <a class="blog-logo" href="/">{{ site.title }}</a>
     {% endif %}
-    <h1 class="blog-title">{{ site.title }}</h1>
-    <h2 class="blog-description">{{ site.description }}</h2>
-    <div class="custom-links">
-      {% for social in site.social %}
-        {% if social.url %}
-            <a class="icon-{{ social.icon }}" href="{{ social.url }}">
-              <i class="fa fa-{{ social.icon }}"></i>
-            </a>
-            &nbsp;&nbsp;·&nbsp;&nbsp;
-        {% endif %}
-      {% endfor %}
-
-      {% for page in site.pages %}
-        {% if page.layout %}
-          {% if page.permalink %}
-            <a href="{{ page.permalink }}">{{ page.title }}</a>
+    <a href="/"><h1 class="blog-title">{{ site.title }}</h1></a>
+    <nav id="nav-wrap" class="custom-links">
+      <div id="nav-menu">MENU</div>
+      <ul id="nav">
+        {% for page in site.pages %}
+          {% if page.layout %}
+            {% if page.permalink %}
+              <li><a href="{{ page.permalink }}">{{ page.title }}</a></li>
+            {% endif %}
           {% endif %}
-        {% endif %}
-      {% endfor %}
-    </div>
+        {% endfor %}
+      </ul>
+    </nav>
 </header>
 
 <!-- header end -->
